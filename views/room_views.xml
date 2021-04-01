@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="room_form_view" model="ir.ui.view">
+            <field name="name">room.form</field>
+            <field name="model">room_booking.room</field>
+            <field name="arch" type="xml">
+                <form string="Room Form">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="code"/>
+                            <field name="status"/>
+                            <field name="capacity"/>
+                            <field name="description"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="room_tree_view" model="ir.ui.view">
+            <field name="name">room.tree</field>
+            <field name="model">room_booking.room</field>
+            <field name="arch" type="xml">
+                <tree string="Room Tree">
+                        <field name="name"/>
+                        <field name="code"/>
+                        <field name="capacity"/>
+                        <field name="active"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="room_list_action" model="ir.actions.act_window">
+            <field name="name">Rooms</field>
+            <field name="res_model">room_booking.room</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">Create the first Room</p>
+            </field>
+        </record>
+
+        <record id="booking_form_view" model="ir.ui.view">
+            <field name="name">booking.form</field>
+            <field name="model">room_booking.booking</field>
+            <field name="arch" type="xml">
+                <form string="Booking Form">
+                    <sheet>
+                        <group>
+                            <field name="code"/>
+                            <field name="room_id"/>
+                            <field name="user_id" widget="many2one_avatar_user"/>
+                            <field name="date" option="{'format': 'YYYY/MM/DD'}"/>
+                            <field name="start" widget="float_time"/>
+                            <field name="end" widget="float_time"/>
+                            <field name="note"/>
+                            <field name="hc_note"/>
+                            <field name="status"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="booking_tree_view" model="ir.ui.view">
+            <field name="name">booking.tree</field>
+            <field name="model">room_booking.booking</field>
+            <field name="arch" type="xml">
+                <tree string="Booking Tree">
+                        <field name="code"/>
+                        <field name="room_id"/>
+                        <field name="user_id" widget="many2one_avatar_user"/>
+                        <field name="date"/>
+                        <field name="start"/>
+                        <field name="end"/>
+                        <field name="note"/>
+                        <field name="hc_note"/>
+                        <field name="status"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="booking_list_action" model="ir.actions.act_window">
+            <field name="name">Bookings</field>
+            <field name="res_model">room_booking.booking</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">Book the first room</p>
+            </field>
+        </record>
+
+        <menuitem id="main_booking_app_menu" name="Room Booking"/>
+        <menuitem id="booking_menu" name="Bookings" parent="main_booking_app_menu"
+                  action="booking_list_action" sequence="0"/>
+
+        <menuitem id="room_menu" name="Rooms" parent="main_booking_app_menu"
+                  action="room_list_action" sequence="1"/>
+
+    </data>
+</odoo>
